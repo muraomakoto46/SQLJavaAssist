@@ -5,10 +5,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
-/*半分自動でDBにinsert intoしてくれるソースコードを生成します。
+/*
+*2025年4月7日更新
+*DBにinsert intoで始まるSQL文が組み込まれたJavaのソースコードを生成します。
  * 対話型で入力していけばソースコードが生成されます。
  * しかし一字一句間違えずに入力できるとは思えないな。どこかで間違える。
- * だからもっと良い手段を考案したいな。*/
+ * だからもっと良い手段を考案したいな。
+ */
 public class DBInsertClassSourceCodeMaker {
 	/* ctrl + i で、字下げインデントできるよ。
 	 * クラス名 SeitoInsert.java
@@ -77,11 +80,11 @@ public class DBInsertClassSourceCodeMaker {
 			printWriter.println("package "+packageName+";\n");
 			printWriter.println(sengenImport+"\n");
 			printWriter.println("public class "+className+ " implements "+interfaceName+"{"+"\n");
-			printWriter.println("	private String address = \""+jdbcAddress+"\";\n"
+			printWriter.println("	private String jdbcAddress = \""+jdbcAddress+"\";\n"
 					+ "	private String databaseName=\""+databaseName+"\";\n"
 					+ "	private String tableName=\""+tableName+"\";\n"
 					+ "	private String userName=\""+userName+"\";\n"
-					+ "	private String password=\""+yourPassword+"\";");
+					+ "	private String yourPassword=\""+yourPassword+"\";");
 			printWriter.println("public "+className+"{\n"
 					+ "		\n"
 					+ "	}");
@@ -92,7 +95,7 @@ public class DBInsertClassSourceCodeMaker {
 			printWriter.print(hikisuwLine.toString());
 			printWriter.println("){\n");
 			printWriter.println("		try(Connection connection = DriverManager.getConnection(");
-			printWriter.println("jdbcAddress"+"+databaseName"+","+userName+","+yourPassword+")){");
+			printWriter.println("jdbcAddress"+"+databaseName"+","+"userName"+","+"yourPassword"+")){");
 			printWriter.println("			try(Statement statement = connection.createStatement()){");
 			printWriter.println("			statement.executeUpdate(");
 			
